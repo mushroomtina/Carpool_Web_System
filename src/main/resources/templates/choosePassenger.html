@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Decide login type</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/color.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css" >
+    <style>
+        .box-format{
+            margin-top: 50px;
+            width: 80%;
+        }
+        .table-format{
+            margin: auto;
+            background: white;
+            border-radius: 10px;
+            width: 80%;
+        }
+        .btn-style{
+            margin-top: 20px;
+            margin-left: 400px;
+            margin-bottom: 15px;
+        }
+        .title{
+            margin-left: 100px;
+        }
+    </style>
+
+</head>
+<body>
+<div class="container box box-format">
+    <div class="title"><h3>My Order</h3></div>
+    <div class="row table-format">
+    <table class="table table-hover">
+        <tr>
+            <th>Origin</th>
+            <th>Destination</th>
+            <th>Date/Time</th>
+            <th>Persons</th>
+            <th>Operation</th>
+        </tr>
+        <tr th:each="order : ${currentPassengers}">
+            <td th:text="${order.origin}"></td>
+            <td th:text="${order.destination}"></td>
+            <td th:text="${order.time}"></td>
+            <td th:text="${order.person}"></td>
+            <td><a th:href="@{/delPsgFromCp(id=${order.id})}">Cancel</a></td>
+        </tr>
+    </table>
+    </div>
+    <div class="row btn-style">
+        <div class="col-md-3"><a class="btn btn-default" th:href="@{\showRecommended(id=${cpid})}" role="button">Add Passengers</a></div>
+        <div class="col-md-3"><a class="btn btn-default" th:href="@{\mainDriver}" role="button">Back</a></div>
+    </div>
+
+</div>
+<script src="../static/js/jquery-3.2.1.min.js"></script>
+<script src="../static/js/bootstrap.min.js"></script>
+</body>
+</body>
+</html>

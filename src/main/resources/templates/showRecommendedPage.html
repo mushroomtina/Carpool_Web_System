@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Recommended Passengers</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/color.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css" >
+    <style>
+        .box-format{
+            margin: auto;
+            margin-top: 50px;
+            background: white;
+            border-radius: 10px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+        .title{
+            margin-top: 15px;
+            margin-left: 30px;
+        }
+        .form{
+            margin-left: 30px;
+            margin-top: 30px;
+            width: 95%;
+        }
+        .btn-style{
+            width: 100px;
+            margin-left: 550px;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="box-format">
+        <div class="title"><h3>Recommended Passengers</h3></div>
+        <div class="form">
+            <table class="table table-hover">
+                <tr>
+                    <th>Origin</th>
+                    <th>Destination</th>
+                    <th>Date/Time</th>
+                    <th>Persons</th>
+                    <th>Operation</th>
+                </tr>
+                <tr th:each="order : ${rcmOrders}">
+                    <td th:text="${order.origin}"></td>
+                    <td th:text="${order.destination}"></td>
+                    <td th:text="${order.time}"></td>
+                    <td th:text="${order.person}"></td>
+                    <td><a th:href="@{/addPsg2Cp(id=${order.id},cpId=${cpId})}">Choose</a></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="row btn-style"><a class="btn btn-default" th:href="@{\mainDriver}" role="button">Back</a></div>
+</div>
+<script src="../static/js/jquery-3.2.1.min.js"></script>
+<script src="../static/js/bootstrap.min.js"></script>
+</body>
+</html>

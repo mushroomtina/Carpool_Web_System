@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.mapper.OrderMapper">
+    <resultMap id="Order" type="com.example.demo.domain.Order">
+        <id column="id" property="id" />
+        <result column="origin" property="origin" />
+        <result column="destination" property="destination" />
+        <result column="time" property="time"/>
+        <result column="person" property="person"/>
+        <result column="ur_id" property="ur_id"/>
+        <result column="cp_id" property="cp_id"/>
+    </resultMap>
+    <resultMap id="Driver" type="com.example.demo.domain.Driver">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="license" property="license" />
+        <result column="age" property="age"/>
+        <result column="gender" property="gender"/>
+        <result column="plate" property="plate"/>
+        <result column="brand" property="brand"/>
+        <result column="model" property="model"/>
+    </resultMap>
+    <insert id="addRequest" parameterType="com.example.demo.domain.Order">
+            insert into passenger (origin,destination,time,person,ur_id) values (#{origin},#{destination},#{time},#{person},#{ur_id})
+    </insert>
+    <select id="getPassengerOrder" resultType="com.example.demo.domain.Order" parameterType="java.lang.Integer">
+        select * from passenger where ur_id = #{ur_id}
+    </select>
+    <delete id="deletePassengerOrder" parameterType="java.lang.Integer">
+        delete from passenger where id = #{id}
+    </delete>
+    <select id="getDriverOrder" resultType="com.example.demo.domain.Order" parameterType="java.lang.Integer">
+        select * from carpool where ur_id = #{ur_id}
+    </select>
+    <insert id="addCarpool" parameterType="com.example.demo.domain.Order">
+            insert into carpool (origin,destination,time,person,ur_id) values (#{origin},#{destination},#{time},#{person},#{ur_id})
+    </insert>
+    <select id="getPassengerOrderByCpId" resultType="com.example.demo.domain.Order" parameterType="java.lang.Integer">
+        select * from passenger where cp_id = #{id}
+    </select>
+    <select id="getCarpoolOrderByCpId" resultType="com.example.demo.domain.Order" parameterType="java.lang.Integer">
+        select * from carpool where id = #{id}
+    </select>
+    <select id="getSatisfied" resultType="com.example.demo.domain.Order" parameterType="com.example.demo.domain.Order">
+        SELECT * FROM passenger where person &lt; ((select person from carpool where id = #{id})+1) and TIME_TO_SEC(TIMEDIFF(time, (SELECT time from carpool where id = #{id}))) &lt; 60*10 and cp_id is null
+    </select>
+    <update id="addPassengerToCarpool" parameterType="java.lang.Integer">
+        update passenger set cp_id = #{CpId} where id = #{id}
+    </update>
+    <update id="delPassengerFromCarpool" parameterType="java.lang.Integer">
+        update passenger set cp_id = null where id = #{id}
+    </update>
+    <select id="getCarpoolCap" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select person from carpool where id = #{id}
+    </select>
+    <select id="getCurrentCap" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select count(id) from passenger where cp_id = #{id}
+    </select>
+</mapper>

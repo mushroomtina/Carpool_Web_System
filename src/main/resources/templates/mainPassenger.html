@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>main page</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/color.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css" >
+    <style>
+        .logo{
+            height: 50px;
+            margin-top: 10px;
+        }
+        .box-format{
+            margin: auto;
+            background: white;
+            border-radius: 8px;
+            width: 80%;
+            margin-top: 10px;
+        }
+        .panel{
+            background: white center;
+            border-radius: 8px;
+            margin-top: 10px;
+            margin-left: 150px;
+            width: 60%;
+            padding: 30px;
+            padding-left: 50px;
+            padding-right: 50px;
+        }
+
+        .imgCircle{
+            border-radius: 50px;
+        }
+        .sum-btn{
+            width: 100px;
+            margin-left: 200px;
+            margin-top: 15px;
+        }
+        .googleMap{
+            display: none;
+            border-radius: 10px;
+        }
+        .title{
+            margin-left: 100px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="float-right">
+        <div class="dropdown">
+            <a th:href="@{/main}" id="dLabel" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="../static/img/logo0.jpg" class="imgCircle logo" alt="logo"></a>
+            <ul class="dropdown-menu" aria-labelledby="dLabel">
+                <li><a th:href="@{/mainPassenger}">Add new request</a></li>
+                <li><a th:href="@{/orderPassenger}">my orders</a></li>
+                <li><a th:href="@{/setting}">setting</a></li>
+            </ul>
+        </div>
+        <h3>Hello, <span th:text="${userInfo.username}">!</span></h3>
+    </div>
+</div>
+<div class="container">
+    <div class="row box-format">
+        <div class="title"><h3>Carpool Request Information</h3></div>
+        <div class="panel">
+            <div class="googleMap" id="googleMap" style="width:500px;height:380px;"></div>
+            <div class="googleMap" id="googleMap2" style="width:500px;height:380px;"></div>
+        <form class="form1" th:action="@{/mainPassenger}" method="post">
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="start" class="control-label">From</label>
+                    <input type="button" class="form-control" id="pickStart" value="Pick a location">
+                    <input type="text" class="form-control" id="start" name="start">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="end" class="control-label">To</label>
+                    <input type="button" class="form-control" id="endStart" value="Pick a location">
+                    <input type="text" class="form-control" id="end" name="end">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="date" class="control-label">Date</label>
+                    <input type="date" class="form-control" id="date" name="date" placeholder="date">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="starttime" class="control-label">Pick up time</label>
+                    <input type="time" class="form-control" id="starttime" name="starttime" placeholder="Time">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                <label for="numbers" class="control-label">Numbers of Persons</label>
+                    <select class="form-control" id="numbers" name="numbers">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="1">4</option>
+                        <option value="2">5</option>
+                        <option value="3">6</option>
+                        <option value="1">7</option>
+                    </select>
+                </div>
+            </div>
+            <div><input type="submit" class="btn btn-default sum-btn" value="Submit"></div>
+        </form>
+        </div>
+    </div>
+
+
+</div>
+
+<footer>
+<!--    copyright info-->
+</footer>
+<script src="../static/js/jquery-3.2.1.min.js"></script>
+<script src="../static/js/bootstrap.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJW4jsPlNKgv6jFm3B5Edp5ywgdqLWdmc&sensor=false"></script>
+<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+<script src="../static/js/map.js"></script>
+</body>
+</html>
