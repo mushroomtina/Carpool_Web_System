@@ -25,7 +25,7 @@ public class BufferAlgo {
     private Point startCoordinate;
     private Point endCoordinate;
     private Point waypoint;
-    private String key = "AIzaSyDfp3YhYwbT6_8GAu4_dpPqe5MeU_F1TD4";
+    private String key = "YOUR_KEY";
     private Integer bufferDistance;
     public Point getStartCoordinate() {
         return startCoordinate;
